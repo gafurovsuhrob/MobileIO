@@ -29,10 +29,11 @@ Body:
 Проект построен на основе **Clean Architecture** и разделён на слои:
 
 app/
-├── data/ # Источники данных (API, Room, DataStore)
-├── domain/ # UseCase-слой, бизнес-логика
-├── presentation/ # UI-слой (Jetpack Compose, ViewModel)
-└── di/ # Модули Koin
+
+-  data/ # Источники данных (API, Room, DataStore)
+- domain/ # UseCase-слой, бизнес-логика
+- presentation/ # UI-слой (Jetpack Compose, ViewModel)
+- di/ # Модули Koin
 
 
 **Поток данных:**
