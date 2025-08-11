@@ -1,5 +1,6 @@
 package com.seros.presentation.ui.main
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.seros.domain.model.User
 import com.seros.domain.usecase.CheckUserLoggedInUseCase
@@ -30,6 +31,14 @@ class MainViewModel (
         viewModelScope.launch {
             logoutUseCase.invoke()
             _currentUser.value = null
+        }
+    }
+
+    fun getCurrentUser() {
+        viewModelScope.launch {
+            _currentUser.value = getOfflineUserUseCase.invoke()
+
+            Log.d("MainViewModel", "currentUser: ${_currentUser.value}")
         }
     }
 
