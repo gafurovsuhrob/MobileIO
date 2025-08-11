@@ -1,4 +1,4 @@
-package com.seros.presentation.ui.auth.login
+package com.seros.domain.validator
 
 object LoginValidator {
     fun validateUsername(username: String): String? {

@@ -4,13 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seros.domain.model.RegisterData
 import com.seros.domain.usecase.RegisterUseCase
+import com.seros.domain.validator.RegisterValidator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    private val validator: RegisterValidator
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RegisterUiState())
@@ -68,12 +70,12 @@ class RegisterViewModel(
     }
 
     private fun validate(): Boolean {
-        val usernameError = RegisterValidator.validateUsername(_uiState.value.username)
-        val nameError = RegisterValidator.validateName(_uiState.value.name)
-        val emailError = RegisterValidator.validateEmail(_uiState.value.email)
-        val phoneError = RegisterValidator.validatePhone(_uiState.value.phone)
-        val passwordError = RegisterValidator.validatePassword(_uiState.value.password)
-        val dateOfBirthError = RegisterValidator.validateDateOfBirth(_uiState.value.dateOfBirth)
+        val usernameError = validator.validateUsername(_uiState.value.username)
+        val nameError = validator.validateName(_uiState.value.name)
+        val emailError = validator.validateEmail(_uiState.value.email)
+        val phoneError = validator.validatePhone(_uiState.value.phone)
+        val passwordError = validator.validatePassword(_uiState.value.password)
+        val dateOfBirthError = validator.validateDateOfBirth(_uiState.value.dateOfBirth)
 
         _uiState.update { it.copy(
             usernameError = usernameError,

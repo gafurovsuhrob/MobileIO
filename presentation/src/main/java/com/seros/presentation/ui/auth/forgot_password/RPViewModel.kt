@@ -3,13 +3,15 @@ package com.seros.presentation.ui.auth.forgot_password
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seros.domain.usecase.RecoverPasswordUseCase
+import com.seros.domain.validator.RPValidator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class RPViewModel(
-    private val recoverPasswordUseCase: RecoverPasswordUseCase
+    private val recoverPasswordUseCase: RecoverPasswordUseCase,
+    private val validator: RPValidator
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(RPUiState())
@@ -33,7 +35,7 @@ class RPViewModel(
     }
 
     private fun validate(): Boolean {
-        val emailError = RPValidator.validateEmail(_uiState.value.email)
+        val emailError = validator.validateEmail(_uiState.value.email)
         _uiState.value = _uiState.value.copy(emailError = emailError)
         return emailError == null
     }

@@ -1,15 +1,16 @@
 package com.seros.presentation.ui.auth.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seros.domain.usecase.LoginUseCase
+import com.seros.domain.validator.LoginValidator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val loginValidator: LoginValidator
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -48,8 +49,8 @@ class LoginViewModel(
     }
 
     private fun login() {
-        val usernameError = LoginValidator.validateUsername(_uiState.value.username.trim())
-        val passwordError = LoginValidator.validatePassword(_uiState.value.password)
+        val usernameError = loginValidator.validateUsername(_uiState.value.username.trim())
+        val passwordError = loginValidator.validatePassword(_uiState.value.password)
 
         if (usernameError != null || passwordError != null) {
             _uiState.value = _uiState.value.copy(

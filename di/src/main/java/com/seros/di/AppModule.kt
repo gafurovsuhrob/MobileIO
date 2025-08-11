@@ -1,6 +1,7 @@
 package com.seros.di
 
 import com.seros.domain.di.useCaseModule
+import com.seros.domain.di.validatorModule
 import org.koin.core.module.Module
 
 val appModules: List<Module> = listOf(
@@ -10,5 +11,6 @@ val appModules: List<Module> = listOf(
     repositoryModule,
     useCaseModule,
     viewModelModule,
-    databaseModule
+    databaseModule,
+    validatorModule
 )

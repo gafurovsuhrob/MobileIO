@@ -1,6 +1,7 @@
 package com.seros.presentation.ui.main
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,6 +24,20 @@ fun MainScreen(
 ) {
     var showLogoutDialog by remember { mutableStateOf(false) }
     val user by mainViewModel.currentUser.collectAsState()
+    val context = LocalContext.current
+
+    var lastBackPressTime by remember { mutableLongStateOf(0L) }
+    val backPressThreshold = 2000L
+
+    BackHandler {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastBackPressTime < backPressThreshold) {
+            (context as? android.app.Activity)?.finish()
+        } else {
+            lastBackPressTime = currentTime
+            Toast.makeText(context, "Нажмите еще раз, чтобы выйти", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     StatusBarColors(
         statusBarColor = MaterialTheme.colorScheme.primary,
@@ -63,7 +78,6 @@ fun MainScreen(
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
-    val context = LocalContext.current
 
     if (showLogoutDialog) {
         BaseAlertDialog(

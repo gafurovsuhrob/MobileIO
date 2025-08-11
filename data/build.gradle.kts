@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.seros.data"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -43,6 +43,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.kotlin.test)
+
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -60,6 +62,8 @@ dependencies {
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+
 
     // DataStore
     implementation(libs.androidx.datastore.preferences)
@@ -67,4 +71,15 @@ dependencies {
     //BCrypt
     implementation(libs.bcrypt)
 
+    // JUnit
+    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.engine)
+
+    // MockK
+    testImplementation(libs.mockk)
+
+    // Mockito
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
 }

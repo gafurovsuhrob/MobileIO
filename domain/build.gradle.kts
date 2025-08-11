@@ -24,4 +24,14 @@ dependencies {
     // BCrypt
     implementation(libs.bcrypt)
 
+    // JUnit
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+
+    // MockK
+    testImplementation(libs.mockk)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

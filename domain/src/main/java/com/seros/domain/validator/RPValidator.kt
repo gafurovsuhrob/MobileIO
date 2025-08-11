@@ -1,4 +1,4 @@
-package com.seros.presentation.ui.auth.forgot_password
+package com.seros.domain.validator
 
 object RPValidator {
     fun validateEmail(email: String): String? {
